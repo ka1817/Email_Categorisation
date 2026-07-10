@@ -22,6 +22,6 @@ processor=TrainingRNN(10,32)
 X_train_pad,y_train,X_test_pad,y_test,tokenizer=processor.preprocess(df)
 model=processor.train(X_train_pad,y_train)
 print(model.evaluate(X_test_pad,y_test))
-print("Results")
+print("Results1")
 
 
