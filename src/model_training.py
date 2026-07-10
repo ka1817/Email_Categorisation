@@ -110,3 +110,4 @@ class ModelTrainer:
         joblib.dump(self.pipeline, model_path)
 
         logger.info("Model saved to %s", model_path)
+        

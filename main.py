@@ -10,6 +10,7 @@ from src.data_ingestion import DataIngestion
 from src.data_preprocessing import DataPreprocessing
 from src.model_training import ModelTrainer
 from config import DATA_PATH
+from src.training_rnn import TrainingRNN
 
 
 logging.basicConfig(
@@ -52,6 +53,6 @@ def main():
         logging.exception("Application failed.")
         raise e
 
-
+    
 if __name__ == "__main__":
     main()
