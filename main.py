@@ -1,6 +1,5 @@
 """
 main.py
-
 Entry point for Email Classification project.
 """
 
@@ -23,6 +22,6 @@ X_train_pad,y_train,X_test_pad,y_test,tokenizer=processor.preprocess(df)
 model=processor.train(X_train_pad,y_train)
 
 print(model.evaluate(X_test_pad,y_test))
-
+print("Evaluation Results")
 
 
