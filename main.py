@@ -12,47 +12,17 @@ from src.model_training import ModelTrainer
 from config import DATA_PATH
 from src.training_rnn import TrainingRNN
 
-
+import pandas as pd
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
 )
+df=pd.read_csv(DATA_PATH)
+processor=TrainingRNN(10,32)
+X_train_pad,y_train,X_test_pad,y_test,tokenizer=processor.preprocess(df)
+model=processor.train(X_train_pad,y_train)
+
+print(model.evaluate(X_test_pad,y_test))
 
 
-def main():
 
-    try:
-        # Load dataset
-        ingestion = DataIngestion(DATA_PATH)
-        df = ingestion.load_data()
-
-        # Preprocess text
-        preprocessing = DataPreprocessing()
-        df = preprocessing.preprocess(df)
-
-        # Train model
-        trainer = ModelTrainer()
-        results = trainer.train(df)
-
-        # Print evaluation metrics
-        print("\n========== Model Performance ==========")
-        print(f"Accuracy: {results['accuracy']:.4f}\n")
-
-        print("Classification Report:")
-        print(results["classification_report"])
-
-        print("Confusion Matrix:")
-        print(results["confusion_matrix"])
-
-        # Save model
-        trainer.save_model()
-
-        print("\nModel saved successfully in artifacts/email_classifier.pkl")
-
-    except Exception as e:
-        logging.exception("Application failed.")
-        raise e
-
-    
-if __name__ == "__main__":
-    main()
